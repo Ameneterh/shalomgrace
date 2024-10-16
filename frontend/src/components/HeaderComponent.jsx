@@ -49,7 +49,7 @@ export default function HeaderComponent() {
         ) : (
           <>
             <Link
-              to="/log-in"
+              to="/login"
               className={`h-full flex items-center text-[#D75825] border hover:text-white border-[#D75825] px-4 py-2 rounded-lg hover:bg-[#D75825] hover:opacity-50`}
             >
               <FaSignInAlt className="inline-block md:hidden text-2xl" />
@@ -89,7 +89,7 @@ export default function HeaderComponent() {
           )}
         </Navbar.Link>
         <Navbar.Link
-          active={path === "/service"}
+          active={path === "/services"}
           as="div"
           className="hover:opacity-50"
         >
@@ -127,7 +127,7 @@ export default function HeaderComponent() {
           )}
         </Navbar.Link>
         <Navbar.Link
-          active={path === "/contact"}
+          active={path === "/contact-us"}
           as="div"
           className="hover:opacity-50"
         >
