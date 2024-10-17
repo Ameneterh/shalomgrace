@@ -2,6 +2,7 @@ import React from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import heroimage from "/hero_img.png";
+import ServicesComponent from "../components/ServicesComponent";
 
 export default function HomePage() {
   return (
@@ -75,7 +76,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* third section */}
+      {/* third section - business units - services brief */}
       <div className="w-full bg-slate-100 px-4 sm:px-20 py-20 flex flex-col items-center sm:flex-row gap-4 sm:gap-10">
         <div className="flex flex-1 flex-col gap-8">
           <p className="text-slate-600">Areas of Activity</p>
@@ -94,31 +95,18 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-between mt-10 gap-4 gap-y-4">
-            <div className="flex flex-col items-center justify-center p-4 px-8 shadow-md rounded-lg">
-              <div className="flex items-center justify-center text-[#D75825] border-2 border-[#D75825] w-40 h-40 rounded-full">
-                10+
-              </div>
-              <p className="font-bold text-[#D75825] mt-4">Medical Devices</p>
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 px-8 shadow-md rounded-lg">
-              <div className="flex items-center justify-center text-[#D75825] border-2 border-[#D75825] w-40 h-40 rounded-full">
-                10+
-              </div>
-              <p className="font-bold text-[#D75825] mt-4">Medical Devices</p>
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 px-8 shadow-md rounded-lg">
-              <div className="flex items-center justify-center text-[#D75825] border-2 border-[#D75825] w-40 h-40 rounded-full">
-                10+
-              </div>
-              <p className="font-bold text-[#D75825] mt-4">Medical Devices</p>
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 px-8 shadow-md rounded-lg">
-              <div className="flex items-center justify-center text-[#D75825] border-2 border-[#D75825] w-40 h-40 rounded-full">
-                10+
-              </div>
-              <p className="font-bold text-[#D75825] mt-4">Medical Devices</p>
-            </div>
+            <ServicesComponent title="Medical Consumables Supply" />
+            <ServicesComponent title="Hospital Equipment & Infrastructure" />
+            <ServicesComponent title="Multi-Drug of Abuse (DOA) Test Kits" />
+            <ServicesComponent title="Lab Equipment, Reagents & Chemicals" />
+            <ServicesComponent title="Industrial Machines and Services" />
           </div>
+          <Link
+            to={"/services"}
+            className="px-4 py-3 bg-[#D75825] text-[white] text-sm w-full sm:w-96 text-center rounded-lg hover:bg-opacity-55"
+          >
+            Find Out More
+          </Link>
         </div>
       </div>
 

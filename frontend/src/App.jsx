@@ -8,6 +8,7 @@ import ContactPage from "./pages/ContactPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ServicesPage from "./pages/ServicesPage";
+import FooterComponent from "./components/FooterComponent";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <FooterComponent />
     </BrowserRouter>
   );
 }
