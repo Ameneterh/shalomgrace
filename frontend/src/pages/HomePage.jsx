@@ -17,9 +17,9 @@ export default function HomePage() {
         }}
         className="min-h-screen w-full flex justify-start"
       >
-        <div className="text-white text-xl bg-[#D75825] px-4 sm:px-20 w-full bg-opacity-70 py-20 sm:py-40 flex flex-col gap-4">
+        <div className="text-[#D75825] text-xl px-4 sm:px-20 w-full bg-opacity-70 py-20 sm:py-40 flex flex-col gap-4">
           <p>We provide</p>
-          <h1 className="text-5xl sm:text-7xl font-extrabold">
+          <h1 className="text-5xl text-white sm:text-7xl font-extrabold drop-shadow-2xl">
             Innovative <br />
             Healthcare <br />
             Solutions
@@ -27,7 +27,7 @@ export default function HomePage() {
 
           <Link
             to={"/services"}
-            className="px-4 py-3 bg-white text-[#D75825] text-sm w-44 text-center rounded-lg hover:bg-[#D75825] hover:text-white"
+            className="px-4 py-3 bg-[#D75825] text-white font-semibold text-sm w-44 text-center rounded-lg hover:shadow-2xl hover:bg-opacity-75"
           >
             View Solutions
           </Link>
