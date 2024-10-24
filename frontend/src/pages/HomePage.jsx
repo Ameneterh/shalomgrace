@@ -3,6 +3,9 @@ import { FaQuoteLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import heroimage from "/hero_img.png";
 import ServicesComponent from "../components/ServicesComponent";
+import ClientList from "../components/ClientList";
+import { clientList } from "../assets/clientList";
+import { team_List } from "../assets/shalomTeam";
 
 export default function HomePage() {
   return (
@@ -34,7 +37,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* second section */}
+      {/* second section - introduction of company*/}
       <div className="w-full bg-white px-4 sm:px-20 py-20 flex flex-col items-center sm:flex-row gap-4 sm:gap-10">
         <div className="flex flex-1 flex-col gap-8">
           <p className="text-slate-600">About Us</p>
@@ -70,6 +73,13 @@ export default function HomePage() {
               <p className="font-bold">supplies made</p>
             </div>
           </div>
+
+          <Link
+            to="/about"
+            className="px-4 py-2 rounded-md border text-center bg-[#D75825] text-white hover:bg-opacity-65"
+          >
+            Read More
+          </Link>
         </div>
         <div className="flex-1 w-full">
           <img src="/home_image2.jpeg" className="rounded-xl" />
@@ -131,6 +141,75 @@ export default function HomePage() {
               <p className="font-bold text-2xl mt-3">Joel Afolabi</p>
               <p className="text-sm -mt-3">Chief Executive Officer</p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* valued clients section */}
+      <div className="px-4 sm:px-20 w-full py-10 sm:py-20 flex flex-col justify-start bg-white text-[#D75825]">
+        <h1 className="text-xl sm:text-4xl font-extrabold uppercase mb-6">
+          our esteemed clients
+        </h1>
+        <p className=" mb-12">
+          We have a long-standing relationship with some of Nigeria’s leading
+          academic institutions and industries, supplying essential equipment
+          and services that meet global standards. Below is a selection of
+          universities and organizations we proudly serve:
+        </p>
+        <div className="flex flex-wrap justify-between gap-4 gap-y-4 sm:gap-y-10 mb-14">
+          {clientList.map((client, index) => (
+            <ClientList
+              key={index}
+              logo={client.logo}
+              name={client.name}
+              address={client.address}
+            />
+          ))}
+        </div>
+        <p>
+          Why are we so trusted?{" "}
+          <Link
+            to={"/"}
+            // bg-[#fdb396]
+            className="text-lg rounded-md hover:opacity-65 font-bold hover:underline underline-offset-2 block sm:inline-block"
+          >
+            Please, click to find out
+          </Link>
+        </p>
+      </div>
+
+      {/* creative team section */}
+      <div className="flex flex-col justify-start bg-white">
+        <div className="px-4 sm:px-20 w-full max-w-6xl mx-auto py-10 sm:py-20 flex flex-col justify-start bg-[#D75825] text-white mb-10 rounded-2xl">
+          <h1 className="text-xl sm:text-4xl font-extrabold uppercase mb-12 text-center">
+            our
+            <br />
+            creative team
+          </h1>
+
+          <div className="flex flex-wrap justify-between gap-4 gap-y-4 sm:gap-y-10 mb-14">
+            {team_List.map((member, index) => (
+              <div className="flex flex-col gap-4">
+                <div
+                  key={index}
+                  className="border-[30px] border-white rounded-full border-t-transparent rotate-45 w-60 h-60 flex items-center justify-center overflow-hidden"
+                >
+                  <div
+                    className="h-[400px] w-[400px] -rotate-45"
+                    style={{
+                      backgroundImage: `url(${member.image})`,
+                      backgroundPosition: "center",
+                      backgroundSize: "contain",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  ></div>
+                </div>
+                <div className="text-center text-white">
+                  <h1 className="text-xl font-bold">{member.name}</h1>
+                  <p className="text-sm">{member.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

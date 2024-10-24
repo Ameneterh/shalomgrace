@@ -75,43 +75,58 @@ export default function ContactPage() {
           </div>
         </div>
         <div className="flex flex-col w-full flex-1 bg-white mt-10 sm:mt-0 p-4 sm:p-10 rounded-xl">
-          <h1 className="text-xl sm:text-2xl font-extrabold">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-[#D75825]">
             Direct Message Here:
           </h1>
           <form className="flex max-w-md flex-col gap-2 mt-4">
             <div>
-              <div className="mb-2 block">
-                <Label htmlFor="email" value="Your email" />
+              <div className="block">
+                <Label
+                  htmlFor="email"
+                  value="Your email"
+                  className="text-[#D75825]"
+                />
               </div>
-              <TextInput
+              <input
                 id="email"
                 type="email"
                 icon={HiMail}
                 placeholder="name@company.com"
+                className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
                 required
                 shadow
               />
             </div>
             <div>
-              <div className="mb-2 block">
-                <Label htmlFor="phone_number" value="Your Phone Number" />
+              <div className="block">
+                <Label
+                  htmlFor="phone_number"
+                  value="Your Phone Number"
+                  className="text-[#D75825]"
+                />
               </div>
-              <TextInput
+              <input
                 id="phone_number"
                 type="text"
                 icon={HiPhone}
                 placeholder="+2348012345678"
+                className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
                 required
                 shadow
               />
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="message" value="Your Message" />
+                <Label
+                  htmlFor="message"
+                  value="Your Message"
+                  className="text-[#D75825]"
+                />
               </div>
               <Textarea
                 id="message"
                 placeholder="Leave a message ..."
+                className="border-[#D75825] placeholder-[#D75825]"
                 required
                 rows={4}
               />
@@ -119,7 +134,7 @@ export default function ContactPage() {
 
             <div className="flex items-center gap-2 mb-4">
               <Checkbox id="agree" />
-              <Label htmlFor="agree" className="flex">
+              <Label htmlFor="agree" className="flex text-[#D75825]">
                 I agree with the&nbsp;
                 <Link href="#" className="text-blue-600 hover:underline">
                   terms and conditions
