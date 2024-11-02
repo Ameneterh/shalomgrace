@@ -3,19 +3,19 @@ export const team_List = [
     id: 1,
     name: "Joel Afolabi",
     title: "Chief Executive Office",
-    image: "/ceo_image.jpeg",
+    image: "/joel_ceo.jpeg",
   },
   {
     id: 2,
     name: "Jaywee Chen",
     title: "Chief Engineer",
-    image: "/ceo_image.jpeg",
+    image: "/chen_ce.jpeg",
   },
   {
     id: 3,
     name: "Elay Zhang",
     title: "Sales Manager",
-    image: "/ceo_image.jpeg",
+    image: "/elay_sm.jpeg",
   },
   {
     id: 4,
@@ -27,6 +27,6 @@ export const team_List = [
     id: 5,
     name: "Abiodun Owoade",
     title: "Operations Manager",
-    image: "/ceo_image.jpeg",
+    image: "/owoade_opm.jpeg",
   },
 ];
