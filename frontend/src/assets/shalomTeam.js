@@ -19,9 +19,9 @@ export const team_List = [
   },
   {
     id: 4,
-    name: "Ayo Olomofe",
+    name: "Ayotunde Olomofe",
     title: "Business Developer",
-    image: "/ceo_image.jpeg",
+    image: "/ayotunde_olomofe.jpg",
   },
   {
     id: 5,
