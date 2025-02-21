@@ -4,13 +4,34 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { FaSignInAlt } from "react-icons/fa";
 import { LuClipboardSignature } from "react-icons/lu";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signOutSuccess } from "../redux/user/userSlice";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HeaderComponent() {
   const path = useLocation().pathname;
   const [menuVisible, setMenuVisible] = useState(false);
-  const [currentUser, setCurrentUser] = useState(false);
+
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/server/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <Navbar fluid rounded className="md:px-14 py-4 sticky top-0 z-50">
@@ -32,19 +53,25 @@ export default function HeaderComponent() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="User settings" img={user[0].avatar} rounded />}
+            label={
+              <Avatar
+                alt="User settings"
+                img={currentUser.profilePicture}
+                rounded
+              />
+            }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{user[0].name}</span>
+              <span className="block text-sm">{currentUser.fullname}</span>
               <span className="block truncate text-sm font-medium">
-                {user[0].email}
+                {currentUser.email}
               </span>
             </Dropdown.Header>
             <Dropdown.Item>Dashboard</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Item>Settings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
           <>

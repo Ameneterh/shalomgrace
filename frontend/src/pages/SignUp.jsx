@@ -25,7 +25,7 @@ export default function SignUp() {
     try {
       setLoading(true);
       setErrorMsg(null);
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/server/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -36,7 +36,7 @@ export default function SignUp() {
       }
       setLoading(false);
       if (res.ok) {
-        navigate("/log-in");
+        navigate("/login");
       }
     } catch (error) {
       setErrorMsg(error.message);
@@ -98,7 +98,7 @@ export default function SignUp() {
 
           <Button
             type="submit"
-            className="bg-[#A95AC0] hover:opacity-85 cursor-pointer flex items-center flex-row gap-10 mt-10 py-1"
+            className="bg-[#d75825] hover:opacity-85 cursor-pointer flex items-center flex-row gap-10 mt-10 py-1"
             disabled={loading}
           >
             {loading ? (
@@ -119,7 +119,7 @@ export default function SignUp() {
             {errorMsg}
           </Alert>
         )}
-        <p className="flex flex-col lg:flex-row items-center gap-1 text-[#999BA1]">
+        <p className="flex flex-col lg:flex-row items-center justify-center gap-1 text-[#999BA1] text-xs">
           By creating an account, you agree to our
           <Link to="/tnc" className="text-[#6236F5] font-semibold">
             Terms & Conditions

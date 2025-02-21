@@ -3,12 +3,21 @@ import { HiMail, HiPhone } from "react-icons/hi";
 import { FaSignInAlt } from "react-icons/fa";
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Divider from "../components/Divider";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
 
 export default function Login() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -16,6 +25,27 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      return dispatch(signInFailure("Please, fill out all fields."));
+    }
+    try {
+      dispatch(signInStart());
+      const res = await fetch("/server/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
+      }
+      if (res.ok) {
+        dispatch(signInSuccess(data));
+        navigate("/");
+      }
+    } catch (error) {
+      dispatch(signInFailure(error.message));
+    }
   };
 
   return (
@@ -43,9 +73,10 @@ export default function Login() {
                 <input
                   id="email"
                   type="email"
-                  icon={HiMail}
+                  // icon={HiMail}
                   placeholder="name@company.com"
                   className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
+                  onChange={handleChange}
                   required
                   shadow
                 />
@@ -62,9 +93,10 @@ export default function Login() {
                 <input
                   id="password"
                   type="password"
-                  icon={HiPhone}
+                  // icon={HiPhone}
                   placeholder="***********"
                   className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
+                  onChange={handleChange}
                   required
                   shadow
                 />
