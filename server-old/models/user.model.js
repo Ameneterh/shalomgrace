@@ -4,47 +4,35 @@ const userSchema = new mongoose.Schema(
   {
     fullname: {
       type: String,
-      required: true,
-      unique: true,
+      default: "Unauthored User",
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
-    },
-    phone: {
-      type: String,
-      required: true,
     },
     password: {
       type: String,
       required: true,
+      minlength: 6,
     },
-
     profilePicture: {
       type: String,
       default:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8LrGjiUDcvYjUMk7jUJJZo0kK4Y4NzKxmQ&s",
-    },
-    lastLogin: {
-      type: Date,
-      default: Date.now,
-    },
-    role: {
-      type: String,
-      default: "user",
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     isAdmin: {
       type: Boolean,
       default: false,
     },
-    resetPasswordToken: String,
-    resetPasswordExpiresAt: Date,
+    role: {
+      type: String,
+      default: "user",
+    },
+    status: {
+      type: String,
+      default: "active",
+    },
   },
   { timestamps: true }
 );

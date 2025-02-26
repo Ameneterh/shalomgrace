@@ -1,50 +1,39 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { HiMail, HiPhone } from "react-icons/hi";
-import { FaSignInAlt } from "react-icons/fa";
+import {
+  FaEdit,
+  FaEye,
+  FaEyeSlash,
+  FaSignInAlt,
+  FaApple,
+  FaFacebook,
+} from "react-icons/fa";
+
 import React from "react";
 import { useState } from "react";
 import Divider from "../components/Divider";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  signInStart,
-  signInSuccess,
-  signInFailure,
-} from "../redux/user/userSlice.js";
+import { useAuthStore } from "../store/authStore.js";
 
 export default function Login() {
-  const dispatch = useDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({});
-  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  const { isLoading, loginUser, error } = useAuthStore();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      return dispatch(signInFailure("Please, fill out all fields."));
-    }
+
     try {
-      dispatch(signInStart());
-      const res = await fetch("/server/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
-      }
-      if (res.ok) {
-        dispatch(signInSuccess(data));
-        navigate("/");
-      }
+      await loginUser(formData.email, formData.password);
+      navigate("/dashboard?tab=dash");
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      console.log(error);
     }
   };
 
@@ -61,19 +50,16 @@ export default function Login() {
 
         <div className="flex-1">
           <div className="">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
               <div>
-                <div className="block">
-                  <Label
-                    htmlFor="email"
-                    value="Your email"
-                    className="text-[#D75825]"
-                  />
-                </div>
+                <Label
+                  htmlFor="email"
+                  value="Your email"
+                  className="text-[#D75825] font-bold"
+                />
                 <input
                   id="email"
                   type="email"
-                  // icon={HiMail}
                   placeholder="name@company.com"
                   className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
                   onChange={handleChange}
@@ -82,32 +68,42 @@ export default function Login() {
                 />
               </div>
 
-              <div>
-                <div className="block">
-                  <Label
-                    htmlFor="password"
-                    value="Your Password"
-                    className="text-[#D75825]"
-                  />
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  // icon={HiPhone}
-                  placeholder="***********"
-                  className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
-                  onChange={handleChange}
-                  required
-                  shadow
+              <div className="">
+                <Label
+                  htmlFor="email"
+                  value="Password:"
+                  className="text-[#D75825] font-bold"
                 />
+                <div className="flex items-center w-full relative">
+                  <input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter Password"
+                    className="border-[#D75825] placeholder-[#D75825] border rounded-lg outline-transparent w-full"
+                    required
+                    onChange={handleChange}
+                  />
+                  <span
+                    className="absolute right-2 text-[#D75825] text-xl cursor-pointer"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
               </div>
+
+              {error && (
+                <p className="text-xs text-red-800 font-semibold mt-2 p-2 text-center bg-red-100 rounded">
+                  {error}
+                </p>
+              )}
 
               <Button
                 type="submit"
                 className="bg-[#D75825] hover:bg-[#D75825] hover:opacity-65 mt-10"
-                disabled={loading}
+                disabled={isLoading}
               >
-                {loading ? (
+                {isLoading ? (
                   <>
                     <Spinner size="sm" />
                     <span className="pl-3">Loading ...</span>

@@ -189,11 +189,8 @@ export default function HomePage() {
 
           <div className="flex flex-wrap justify-between gap-4 gap-y-4 sm:gap-y-10 mb-14">
             {team_List.map((member, index) => (
-              <div className="flex flex-col gap-4">
-                <div
-                  key={index}
-                  className="border-[30px] border-white rounded-full border-t-transparent rotate-45 w-60 h-60 flex items-center justify-center overflow-hidden"
-                >
+              <div key={index} className="flex flex-col gap-4">
+                <div className="border-[30px] border-white rounded-full border-t-transparent rotate-45 w-60 h-60 flex items-center justify-center overflow-hidden">
                   <div
                     className="h-[400px] w-[400px] -rotate-45"
                     style={{

@@ -5,32 +5,21 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { FaSignInAlt } from "react-icons/fa";
 import { LuClipboardSignature } from "react-icons/lu";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signOutSuccess } from "../redux/user/userSlice";
+// import { signOutSuccess } from "../redux/user/userSlice";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { useAuthStore } from "../store/authStore";
 
 export default function HeaderComponent() {
   const path = useLocation().pathname;
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const { currentUser } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { user, logout } = useAuthStore();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignout = async () => {
-    try {
-      const res = await fetch("/server/user/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signOutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    logout();
   };
 
   return (
@@ -49,27 +38,27 @@ export default function HeaderComponent() {
         </p> */}
       </Navbar.Brand>
       <div className="flex gap-3 items-center md:order-2">
-        {currentUser ? (
+        {user ? (
           <Dropdown
             arrowIcon={false}
             inline
             label={
-              <Avatar
-                alt="User settings"
-                img={currentUser.profilePicture}
-                rounded
-              />
+              <Avatar alt="User settings" img={user.profilePicture} rounded />
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{currentUser.fullname}</span>
-              <span className="block truncate text-sm font-medium">
-                {currentUser.email}
+              <span className="block text-sm font-semibold">
+                {user.fullname}
+              </span>
+              <span className="block truncate text-xs font-medium">
+                {user.email}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            <Link to={"/dashboard"}>
+              <Dropdown.Item>Dashboard</Dropdown.Item>
+            </Link>
+            {/* <Dropdown.Item>Earnings</Dropdown.Item> */}
+            <Dropdown.Item>Create Post</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>

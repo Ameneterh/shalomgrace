@@ -5,42 +5,34 @@ import { FcGoogle } from "react-icons/fc";
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import Divider from "../components/Divider";
+import { useAuthStore } from "../store/authStore";
 
 export default function SignUp() {
+  const { registerUser, error, isLoading } = useAuthStore();
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({});
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
 
-  const handleSubmit = async (e) => {
+  console.log(formData);
+
+  const handleRegisterUser = async (e) => {
     e.preventDefault();
-    if (!formData.fullname || !formData.email || !formData.password) {
-      return setErrorMsg("Please, fill out all fields!");
-    }
+
     try {
-      setLoading(true);
-      setErrorMsg(null);
-      const res = await fetch("/server/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        return setErrorMsg(data.message);
-      }
-      setLoading(false);
-      if (res.ok) {
-        navigate("/login");
-      }
+      await registerUser(
+        formData.fullname,
+        formData.email,
+        formData.phone,
+        formData.password
+      );
+      navigate("/login");
     } catch (error) {
-      setErrorMsg(error.message);
-      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -54,7 +46,7 @@ export default function SignUp() {
           </h1>
           <Divider />
         </div>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleRegisterUser}>
           <div className="w-full flex flex-col gap-2">
             <Label htmlFor="fullname" value="Full Name" className="font-bold" />
             <TextInput
@@ -71,6 +63,20 @@ export default function SignUp() {
               id="email"
               type="email"
               placeholder="Ex: Maguire@FlexUI.com"
+              required
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <Label
+              htmlFor="phone"
+              value="Your Phone Number"
+              className="font-bold"
+            />
+            <TextInput
+              id="phone"
+              type="text"
+              placeholder="Ex: +2348123456789"
               required
               onChange={handleChange}
             />
@@ -96,12 +102,18 @@ export default function SignUp() {
             </div>
           </div>
 
+          {error && (
+            <p className="text-xs text-red-800 font-semibold mt-2 p-2 text-center bg-red-100 rounded">
+              {error}
+            </p>
+          )}
+
           <Button
             type="submit"
             className="bg-[#d75825] hover:opacity-85 cursor-pointer flex items-center flex-row gap-10 mt-10 py-1"
-            disabled={loading}
+            disabled={isLoading}
           >
-            {loading ? (
+            {isLoading ? (
               <>
                 <Spinner size="md" />
                 <span className="pl-3">Creating Account ...</span>
@@ -114,11 +126,7 @@ export default function SignUp() {
             )}
           </Button>
         </form>
-        {errorMsg && (
-          <Alert className="mt-5" color="failure">
-            {errorMsg}
-          </Alert>
-        )}
+
         <p className="flex flex-col lg:flex-row items-center justify-center gap-1 text-[#999BA1] text-xs">
           By creating an account, you agree to our
           <Link to="/tnc" className="text-[#6236F5] font-semibold">
