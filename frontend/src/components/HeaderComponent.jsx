@@ -124,25 +124,6 @@ export default function HeaderComponent() {
           )}
         </Navbar.Link>
         <Navbar.Link
-          active={path === "/about"}
-          as="div"
-          className="hover:opacity-50"
-        >
-          <Link
-            to="/about"
-            className={`sm:text-[#D75825] text-[16px] w-full h-full ${
-              path === "/about" ? "text-white font-bold" : "text-[#D75825]"
-            }`}
-          >
-            About
-          </Link>
-          {path === "/about" ? (
-            <hr className="border-[1px] border-[#D75825] hidden sm:block" />
-          ) : (
-            <></>
-          )}
-        </Navbar.Link>
-        <Navbar.Link
           active={path === "/blog-posts"}
           as="div"
           className="hover:opacity-50"
@@ -156,6 +137,44 @@ export default function HeaderComponent() {
             Blog Posts
           </Link>
           {path === "/blog-posts" ? (
+            <hr className="border-[1px] border-[#D75825] hidden sm:block" />
+          ) : (
+            <></>
+          )}
+        </Navbar.Link>
+        <Navbar.Link
+          active={path === "/gallery"}
+          as="div"
+          className="hover:opacity-50"
+        >
+          <Link
+            to="/gallery"
+            className={`sm:text-[#D75825] text-[16px] w-full h-full ${
+              path === "/gallery" ? "text-white font-bold" : "text-[#D75825]"
+            }`}
+          >
+            Gallery
+          </Link>
+          {path === "/gallery" ? (
+            <hr className="border-[1px] border-[#D75825] hidden sm:block" />
+          ) : (
+            <></>
+          )}
+        </Navbar.Link>
+        <Navbar.Link
+          active={path === "/about"}
+          as="div"
+          className="hover:opacity-50"
+        >
+          <Link
+            to="/about"
+            className={`sm:text-[#D75825] text-[16px] w-full h-full ${
+              path === "/about" ? "text-white font-bold" : "text-[#D75825]"
+            }`}
+          >
+            About
+          </Link>
+          {path === "/about" ? (
             <hr className="border-[1px] border-[#D75825] hidden sm:block" />
           ) : (
             <></>
