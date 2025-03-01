@@ -6,6 +6,7 @@ import path from "path";
 
 import dbConnection from "./config/dbConfig.js";
 import authRouter from "./routes/auth.routes.js";
+import postRouter from "./routes/post.routes.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/server/auth", authRouter);
+app.use("/server/post", postRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));

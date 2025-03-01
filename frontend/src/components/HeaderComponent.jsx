@@ -143,6 +143,25 @@ export default function HeaderComponent() {
           )}
         </Navbar.Link>
         <Navbar.Link
+          active={path === "/blog-posts"}
+          as="div"
+          className="hover:opacity-50"
+        >
+          <Link
+            to="/blog-posts"
+            className={`sm:text-[#D75825] text-[16px] w-full h-full ${
+              path === "/blog-posts" ? "text-white font-bold" : "text-[#D75825]"
+            }`}
+          >
+            Blog Posts
+          </Link>
+          {path === "/blog-posts" ? (
+            <hr className="border-[1px] border-[#D75825] hidden sm:block" />
+          ) : (
+            <></>
+          )}
+        </Navbar.Link>
+        <Navbar.Link
           active={path === "/contact-us"}
           as="div"
           className="hover:opacity-50"

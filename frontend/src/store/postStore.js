@@ -8,32 +8,20 @@ const API_URL =
 
 axios.defaults.withCredentials = true;
 
-export const useInvoiceStore = create((set) => ({
-  //   invoice: null,
+export const usePostStore = create((set) => ({
+  // post: null,
   error: null,
   isLoading: false,
   message: null,
 
   //   add new invoice
-  createInvoice: async (
-    validity,
-    invoiceNumber,
-    list,
-    total,
-    invoiceType,
-    createdBy,
-    client
-  ) => {
+  createPost: async (title, content, poster) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(`${API_URL}/invoice/create-invoice`, {
-        validity,
-        invoiceNumber,
-        list,
-        total,
-        invoiceType,
-        createdBy,
-        client,
+      const response = await axios.post(`${API_URL}/post/create-post`, {
+        title,
+        content,
+        poster,
       });
       set({
         // invoice: response.data.invoice,
@@ -42,7 +30,7 @@ export const useInvoiceStore = create((set) => ({
       });
     } catch (error) {
       set({
-        error: error.response.data.message || "Error adding invoice",
+        error: error.response.data.message || "Error creating post",
         isLoading: false,
       });
       throw error;
@@ -50,18 +38,18 @@ export const useInvoiceStore = create((set) => ({
   },
 
   //   get all clients
-  getAllInvoices: async () => {
+  getAllPosts: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.get(`${API_URL}/invoice/get-invoices`);
+      const response = await axios.get(`${API_URL}/post/get-posts`);
       set({
-        invoices: response.data.invoices,
+        posts: response.data.posts,
         isLoading: false,
       });
       return response.data;
     } catch (error) {
       set({
-        error: error.response.data.message || "Error getting Invoices",
+        error: error.response.data.message || "Error getting Posts",
         isLoading: false,
       });
       throw error;
@@ -69,20 +57,18 @@ export const useInvoiceStore = create((set) => ({
   },
 
   //   get one clients
-  getOneInvoice: async (clientId) => {
+  getPostBySlug: async (slug) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.get(
-        `${API_URL}/client/get-client/${clientId}`
-      );
+      const response = await axios.get(`${API_URL}/post/get-post/${slug}`);
       set({
-        client: response.data.client,
+        post: response.data.post,
         isLoading: false,
       });
       return response.data;
     } catch (error) {
       set({
-        error: error.response.data.message || "Error getting clients",
+        error: error.response.data.message || "Error getting post",
         isLoading: false,
       });
       throw error;

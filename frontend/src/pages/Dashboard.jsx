@@ -6,6 +6,7 @@ import DashProfile from "../components/DashProfile";
 import DashboardComponent from "../components/DashboardComponent";
 // import DashPosts from "../components/DashPosts";
 import DashUsers from "../components/DashUsers";
+import CreatePostPage from "./CreatePostPage";
 // import DashComments from "../components/DashComments";
 // import DashboardComponent from "../components/DashboardComponent";
 // import DashMessages from "../components/DashMessages";

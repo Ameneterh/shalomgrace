@@ -268,7 +268,7 @@ export default function DashProfile() {
           )}
         </Button>
 
-        {user.isAdmin && (
+        {/* {user.isAdmin && (
           <Link to="/create-post">
             <Button
               type="button"
@@ -278,7 +278,7 @@ export default function DashProfile() {
               Create a Post
             </Button>
           </Link>
-        )}
+        )} */}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={() => setShowModal(true)} className="cursor-pointer">

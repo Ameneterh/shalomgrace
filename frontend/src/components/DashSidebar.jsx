@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   HiAnnotation,
   HiArrowSmRight,
+  HiDocumentAdd,
   HiChartPie,
   HiDocumentText,
   HiOutlineUserGroup,
@@ -55,6 +56,18 @@ export default function DashSidebar() {
               Profile
             </Sidebar.Item>
           </Link>
+
+          {user.isAdmin && (
+            <Link to="/create-post">
+              <Sidebar.Item
+                // active={tab === "create-post"}
+                icon={HiDocumentAdd}
+                as="div"
+              >
+                Create Post
+              </Sidebar.Item>
+            </Link>
+          )}
 
           {user.isAdmin && (
             <Link to="/dashboard?tab=posts">

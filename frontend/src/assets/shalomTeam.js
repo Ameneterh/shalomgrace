@@ -2,7 +2,7 @@ export const team_List = [
   {
     id: 1,
     name: "Joel Afolabi",
-    title: "Chief Executive Office",
+    title: "Chief Executive Officer",
     image: "/joel_ceo.jpeg",
   },
   {

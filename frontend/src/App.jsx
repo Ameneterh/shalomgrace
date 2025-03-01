@@ -15,6 +15,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore.js";
 import Spinner from "./components/Spinner";
 import { useState, useEffect } from "react";
+import CreatePostPage from "./pages/CreatePostPage.jsx";
+import BlogPosts from "./pages/BlogPosts.jsx";
+import PostPage from "./components/PostPage.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 // protected routes
 const ProtectedRoute = ({ children }) => {
@@ -54,12 +58,15 @@ function App() {
 
   return (
     <div>
+      <ScrollToTop />
       <HeaderComponent />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/blog-posts" element={<BlogPosts />} />
+        <Route path="/posts/:slug" element={<PostPage />} />
 
         {/* these routes will be redirected once authenticated */}
         <Route
@@ -86,7 +93,7 @@ function App() {
 
         {/* private admin routes */}
         <Route element={<PrivateRoutesAdmin />}>
-          <Route path="/create-post" element={<Dashboard />} />
+          <Route path="/create-post" element={<CreatePostPage />} />
         </Route>
 
         {/* not found */}
