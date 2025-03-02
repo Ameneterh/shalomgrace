@@ -1,14 +1,10 @@
 import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema(
+const videoSchema = new mongoose.Schema(
   {
     poster: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
-    },
-    content: {
-      type: String,
       required: true,
     },
     title: {
@@ -16,12 +12,11 @@ const postSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    // image: {
-    //   type: String,
-    //   default:
-    //     "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2021/09/how-to-write-a-blog-post.png",
-    // },
-    slug: {
+    description: {
+      type: String,
+      required: true,
+    },
+    video_url: {
       type: String,
       required: true,
       unique: true,
@@ -46,6 +41,6 @@ const postSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Post = mongoose.model("Post", postSchema);
+const Video = mongoose.model("Video", videoSchema);
 
-export default Post;
+export default Video;

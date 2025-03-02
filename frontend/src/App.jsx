@@ -19,6 +19,7 @@ import CreatePostPage from "./pages/CreatePostPage.jsx";
 import BlogPosts from "./pages/BlogPosts.jsx";
 import PostPage from "./components/PostPage.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import GalleryPage from "./pages/GalleryPage.jsx";
 
 // protected routes
 const ProtectedRoute = ({ children }) => {
@@ -67,6 +68,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/blog-posts" element={<BlogPosts />} />
         <Route path="/posts/:slug" element={<PostPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
 
         {/* these routes will be redirected once authenticated */}
         <Route

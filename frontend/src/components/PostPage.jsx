@@ -44,7 +44,7 @@ export default function PostPage() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen max-w-4xl w-full mx-auto mt-2 p-4 rounded-xl text-gray-200"
+      className="min-h-screen max-w-4xl w-full mx-auto my-6 p-4 rounded-xl text-gray-200"
     >
       <h1 className="text-xl md:text-3xl font-semibold text-center mb-6">
         {selectedPost?.title}

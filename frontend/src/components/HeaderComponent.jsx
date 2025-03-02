@@ -54,11 +54,13 @@ export default function HeaderComponent() {
                 {user.email}
               </span>
             </Dropdown.Header>
-            <Link to={"/dashboard"}>
+            <Link to={"/dashboard?tab=dash"}>
               <Dropdown.Item>Dashboard</Dropdown.Item>
             </Link>
             {/* <Dropdown.Item>Earnings</Dropdown.Item> */}
-            <Dropdown.Item>Create Post</Dropdown.Item>
+            <Link to={"/create-post"}>
+              <Dropdown.Item>Create Post</Dropdown.Item>
+            </Link>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>

@@ -11,37 +11,32 @@ import {
 } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
+import { useAuthStore } from "../store/authStore";
+import { useVideoStore } from "../store/videoStore";
 
 export default function AddPost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const { user } = useAuthStore();
+  const { addVideo } = useVideoStore();
 
-  // console.log(formData);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const poster = user._id;
     try {
-      const res = await fetch("/api/content/addvideo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setPublishError(data.message);
-        return;
-      }
-      if (res.ok) {
-        setPublishError(null);
-        navigate("/health-talks");
-      }
+      await addVideo(
+        formData.title,
+        formData.description,
+        formData.video_url,
+        poster
+      );
+      navigate("/gallery");
     } catch (error) {
-      setPublishError("Something went wrong");
+      console.log(error);
     }
   };
 
@@ -55,21 +50,21 @@ export default function AddPost() {
             type="text"
             placeholder="Video Title"
             required
-            id="videotitle"
+            id="title"
             className="flex-1"
             onChange={(e) =>
-              setFormData({ ...formData, videotitle: e.target.value })
+              setFormData({ ...formData, title: e.target.value })
             }
           />
           <TextInput
             type="text"
             placeholder="Video URL"
-            id="videoId"
+            id="video_url"
             className="flex-1"
             onChange={(e) =>
               setFormData({
                 ...formData,
-                videoId: e.target.value.split("=")[1],
+                video_url: e.target.value.split("=")[1],
               })
             }
           />
@@ -81,7 +76,7 @@ export default function AddPost() {
           className="h-20 mb-12"
           required
           onChange={(value) => {
-            setFormData({ ...formData, videodescription: value });
+            setFormData({ ...formData, description: value });
           }}
         />
 

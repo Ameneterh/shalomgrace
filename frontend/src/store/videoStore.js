@@ -8,19 +8,20 @@ const API_URL =
 
 axios.defaults.withCredentials = true;
 
-export const usePostStore = create((set) => ({
+export const useVideoStore = create((set) => ({
   // post: null,
   error: null,
   isLoading: false,
   message: null,
 
-  //   add new invoice
-  createPost: async (title, content, poster) => {
+  //   add new video
+  addVideo: async (title, description, video_url, poster) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(`${API_URL}/post/create-post`, {
+      const response = await axios.post(`${API_URL}/video/add-video`, {
         title,
-        content,
+        description,
+        video_url,
         poster,
       });
       set({
@@ -37,19 +38,19 @@ export const usePostStore = create((set) => ({
     }
   },
 
-  //   get all clients
-  getAllPosts: async () => {
+  //   get all videos
+  getAllVideos: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.get(`${API_URL}/post/get-posts`);
+      const response = await axios.get(`${API_URL}/video/get-videos`);
       set({
-        posts: response.data.posts,
+        videos: response.data.videos,
         isLoading: false,
       });
       return response.data;
     } catch (error) {
       set({
-        error: error.response.data.message || "Error getting Posts",
+        error: error.response.data.message || "Error getting Videos",
         isLoading: false,
       });
       throw error;

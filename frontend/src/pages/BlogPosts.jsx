@@ -5,10 +5,11 @@ import PostsComponent from "../components/PostsComponent";
 
 export default function BlogPosts() {
   const [posts, setPosts] = useState([]);
-  const { getAllPosts } = usePostStore();
+  const { getAllPosts, isLoading } = usePostStore();
 
   useEffect(() => {
     const fetchPosts = async () => {
+      isLoading;
       try {
         const posts = await getAllPosts();
         setPosts(posts.posts);
@@ -32,9 +33,15 @@ export default function BlogPosts() {
         className="min-h-screen max-w-6xl w-full mx-auto mt-2 p-4 rounded-xl"
       >
         <h1 className="text-xl md:text-3xl font-semibold text-center text-white mb-6">
-          All Added Content
+          Enlightening, Educating, Entertaining!
         </h1>
-        <div className="w-full flex flex-col sm:flex-row gap-4">
+        <p className="text-sm py-5 max-w-4xl mx-auto text-center text-white">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque
+          dolores excepturi porro sapiente non inventore fugiat facere magni
+          soluta laborum nemo, iure voluptatibus voluptate in, nostrum neque
+          libero explicabo veritatis?
+        </p>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <PostsComponent />
         </div>
       </motion.div>
