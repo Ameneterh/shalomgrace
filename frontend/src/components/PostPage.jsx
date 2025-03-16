@@ -6,11 +6,13 @@ import moment from "moment";
 import { usePostStore } from "../store/postStore";
 import { useParams } from "react-router-dom";
 import Divider from "./Divider";
+import CommentSection from "./CommentSection";
 
 export default function PostPage() {
-  const { getAllPosts } = usePostStore();
+  const { getAllPosts, getAllComments } = usePostStore();
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState({});
+  const [postComments, setPostComments] = useState([]);
   const { slug } = useParams();
 
   useEffect(() => {
@@ -36,7 +38,25 @@ export default function PostPage() {
     }
   }, [posts]);
 
-  console.log(selectedPost);
+  // -------------------------------------------
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const comments = await getAllComments();
+
+        const selectedComments = comments.comments.filter(
+          (comment) => comment.postId === selectedPost._id
+        );
+        setPostComments(selectedComments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getComments();
+  }, [selectedPost]);
+
+  console.log(postComments);
 
   return (
     <motion.div
@@ -75,12 +95,12 @@ export default function PostPage() {
           </p>
         </div>
         <div className="flex items-center gap-2 text-md">
-          <p className="flex items-center gap-1">
+          {/* <p className="flex items-center gap-1">
             {selectedPost?.numberOfComments}
             <BiLike />
-          </p>
+          </p> */}
           <p className="flex items-center gap-1">
-            {selectedPost?.numberOfComments}
+            {postComments?.length > 0 ? postComments?.length : 0}
             <BiCommentDetail />
           </p>
         </div>
@@ -95,6 +115,9 @@ export default function PostPage() {
           }}
           className="w-full text-md text-justify mt-2"
         ></div>
+      </div>
+      <div className="max-w-5xl my-6">
+        <CommentSection postId={selectedPost?._id} />
       </div>
     </motion.div>
   );

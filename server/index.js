@@ -7,6 +7,7 @@ import path from "path";
 import dbConnection from "./config/dbConfig.js";
 import authRouter from "./routes/auth.routes.js";
 import postRouter from "./routes/post.routes.js";
+import commentRouter from "./routes/comment.routes.js";
 import videoRouter from "./routes/video.routes.js";
 
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use("/server/auth", authRouter);
 app.use("/server/post", postRouter);
+app.use("/server/comment", commentRouter);
 app.use("/server/video", videoRouter);
 
 if (process.env.NODE_ENV === "production") {

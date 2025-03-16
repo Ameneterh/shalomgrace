@@ -21,8 +21,6 @@ export default function BlogPosts() {
     fetchPosts();
   }, []);
 
-  console.log(posts);
-
   return (
     <div className="py-2 md:py-6 flex">
       <motion.div
@@ -36,13 +34,16 @@ export default function BlogPosts() {
           Enlightening, Educating, Entertaining!
         </h1>
         <p className="text-sm py-5 max-w-4xl mx-auto text-center text-white">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque
-          dolores excepturi porro sapiente non inventore fugiat facere magni
-          soluta laborum nemo, iure voluptatibus voluptate in, nostrum neque
-          libero explicabo veritatis?
+          elit. Eaque dolores excepturi porro sapiente non inventore fugiat
+          facere magni soluta laborum nemo, iure voluptatibus voluptate in,
+          nostrum neque libero explicabo veritatis? Lorem ipsum dolor sit amet,
+          consectetur adipisicing
         </p>
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <PostsComponent />
+        <div className="w-full flex flex-col lg:flex-row gap-4">
+          <div className="w-full md:w-3/4 flex flex-col gap-4">
+            <PostsComponent />
+          </div>
+          <div className="max-w-96">Advert Placement</div>
         </div>
       </motion.div>
     </div>

@@ -32,21 +32,21 @@ export default function PostsComponent() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5 }}
-            className="w-full sm:w-72 mx-auto mt-2 rounded bg-white bg-opacity-50 shadow-md overflow-hidden"
+            className="w-full mx-auto mt-2 rounded bg-white shadow-md overflow-hidden"
           >
             <div className="px-3 py-2">
-              <h1 className="text-sm md:text-lg font-semibold text-white line-clamp-1">
+              <h1 className="text-sm md:text-lg font-semibold line-clamp-1 md:line-clamp-none">
                 {post.title}
               </h1>
               <Divider />
               <div
                 dangerouslySetInnerHTML={{ __html: post && post.content }}
-                className="w-full text-sm text-justify mt-2 line-clamp-3"
+                className="w-full text-sm text-justify mt-2 line-clamp-3 text-gray-800"
               ></div>
             </div>
             {/* <Divider /> */}
             <div className="flex justify-between items-center gap-2 text-sm bg-white px-3 py-1">
-              <p className="flex items-center gap-1 text-xs">
+              <p className="flex items-center gap-1 text-xs text-red-700 font-semibold">
                 Posted on:{" "}
                 {moment(post.createdAt).format("MM/DD/YYYY HH:mm:ss")}
               </p>

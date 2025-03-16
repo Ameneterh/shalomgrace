@@ -20,6 +20,7 @@ import BlogPosts from "./pages/BlogPosts.jsx";
 import PostPage from "./components/PostPage.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
+import UpdatePostPage from "./pages/UpdatePostPage.jsx";
 
 // protected routes
 const ProtectedRoute = ({ children }) => {
@@ -96,6 +97,7 @@ function App() {
         {/* private admin routes */}
         <Route element={<PrivateRoutesAdmin />}>
           <Route path="/create-post" element={<CreatePostPage />} />
+          <Route path="/update-post/:postId" element={<UpdatePostPage />} />
         </Route>
 
         {/* not found */}
